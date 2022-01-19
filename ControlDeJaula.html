@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Jaula</title>
+    <link rel="stylesheet" href="C:/Users/jesusemmanuel/Documents/9no/Embebidos/P20/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="cabezera">
+            <img src="C:/Users/jesusemmanuel/Documents/9no/Embebidos/P20/foof.png" alt="Foof" id="foto">
+        </div> 
+        <div class="cuerpo">
+			<h1 style="color:black;">Control de Jaula</h1>	
+			<input type="button" id="buttonOn" onClick="switchOn()" class="submit" value="Abrir"/>
+			<input type="button" id="buttonOff" onClick="switchOff()" class="submit" value="Cerrar"/>
+        </div>
+    </div>
+    <script
+      src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script>
+    var accessToken = "6dfef90edb1ff28eb804e09b4d664f5b78d07872";
+	var deviceID = "2e0041001847393035313138"
+	var url = "https://api.particle.io/v1/devices/" + deviceID + "/led";
+  
+        function switchOn()
+{
+	$.post(url, {params: "on", access_token: accessToken },function(datos){
+	if(datos.return_value === 1)
+	{
+		document.getElementById("buttonOn").style.backgroundColor = "green";
+		document.getElementById("buttonOn").style.color = "white";
+		
+		document.getElementById("buttonOff").style.backgroundColor = "white";
+		document.getElementById("buttonOff").style.color = "black";
+	}
+	else{
+		document.getElementById("buttonOn").style.backgroundColor = "yellow";
+		document.getElementById("buttonOn").style.color = "black";
+		
+		document.getElementById("buttonOff").style.backgroundColor = "white";
+		document.getElementById("buttonOff").style.color = "black";
+		document.getElementById('foto').src='C:/Users/jesusemmanuel/Documents/9no/Embebidos/P20/foof.png';
+		alert("Se detecta algo dentro de la jaula...");
+		}
+	},"json");
+}  
+        
+  
+        function switchOff()
+{
+	$.post(url, {params: "off", access_token: accessToken },function(datos){
+	if(datos.return_value === 0)
+	{
+		document.getElementById("buttonOn").style.backgroundColor = "white";
+		document.getElementById("buttonOn").style.color = "black";
+		
+		document.getElementById("buttonOff").style.backgroundColor = "red";
+		document.getElementById("buttonOff").style.color = "white";
+	}
+	else{
+		document.getElementById("buttonOn").style.backgroundColor = "white";
+		document.getElementById("buttonOn").style.color = "black";
+		
+		document.getElementById("buttonOff").style.backgroundColor = "yellow";
+		document.getElementById("buttonOff").style.color = "black";
+		document.getElementById('foto').src='C:/Users/jesusemmanuel/Documents/9no/Embebidos/P20/foof.png';
+		alert("Se detecta algo dentro de la jaula...");
+		}
+	},"json");
+}
+
+        function switchIdle()
+{
+	$.post(url, {params: "on", access_token: accessToken },function(datos){
+	if(datos.return_value === 2)
+	{
+		document.getElementById("buttonOn").style.backgroundColor = "green";
+		document.getElementById("buttonOn").style.color = "white";
+		
+		document.getElementById("buttonOff").style.backgroundColor = "white";
+		document.getElementById("buttonOff").style.color = "black";
+	}
+	else{
+		document.getElementById("buttonOn").style.backgroundColor = "red";
+		document.getElementById("buttonOn").style.color = "white";
+		
+		document.getElementById("buttonOff").style.backgroundColor = "white";
+		document.getElementById("buttonOff").style.color = "black";
+		document.getElementById('foto').src='C:/Users/jesusemmanuel/Documents/9no/Embebidos/P20/Fon.png';
+		alert("Jaula abierta\n:^)");
+		}
+	},"json");
+}  
+        
+  
+        function switchTrap()
+{
+	$.post(url, {params: "off", access_token: accessToken },function(datos){
+	if(datos.return_value === 3)
+	{
+		document.getElementById("buttonOn").style.backgroundColor = "white";
+		document.getElementById("buttonOn").style.color = "black";
+		
+		document.getElementById("buttonOff").style.backgroundColor = "red";
+		document.getElementById("buttonOff").style.color = "white";
+		var off = document.getElementById('foto').src='C:/Users/jesusemmanuel/Documents/9no/Embebidos/P20/Fon.png';
+	}
+	else{
+		document.getElementById("buttonOn").style.backgroundColor = "white";
+		document.getElementById("buttonOn").style.color = "black";
+		
+		document.getElementById("buttonOff").style.backgroundColor = "green";
+		document.getElementById("buttonOff").style.color = "white";
+		var off = document.getElementById('foto').src='C:/Users/jesusemmanuel/Documents/9no/Embebidos/P20/Fon.png';
+		alert("Jaula cerrada\n:^)");
+		}
+	},"json");
+}
+
+      </script>
+	  
+</body>
+</html>
